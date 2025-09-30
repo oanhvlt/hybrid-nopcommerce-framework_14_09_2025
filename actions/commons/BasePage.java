@@ -40,6 +40,10 @@ public class BasePage {
         }
     }
 
+    private String caseParameter(String locator, String... restParameter){
+        return String.format(locator, (Object[]) restParameter);
+    }
+
     //Truyền tham số vào loại gì sẽ trả về kieu By tương ứng
     //convention: css/id/name/class
     private By getByLocator(String prefixLocator){
@@ -154,24 +158,40 @@ public class BasePage {
 
     //Element
     public void clickToElem(WebDriver driver, String locator) {
-       getElement(driver,locator).click();
+        getElement(driver,locator).click();
     }
+
+    public void clickToElem(WebDriver driver, String locator, String restParameter) {
+        getElement(driver, caseParameter(locator, restParameter)).click();
+    }
+
     public void sendKeyToElement(WebDriver driver, String locator, String keyToSend) {
-        getElement(driver,locator).sendKeys(keyToSend);
+        getElement(driver,locator).clear();
+        getElement(driver, locator).sendKeys(keyToSend);
+    }
+
+    public void sendKeyToElement(WebDriver driver, String locator, String keyToSend, String restParameter) {
+        getElement(driver,locator).clear();
+        getElement(driver, caseParameter(locator,restParameter)).sendKeys(keyToSend);
     }
 
     public void clearTextInputElement(WebDriver driver, String locator) {
         getElement(driver,locator).clear();
     }
 
-
     public void selectItemInDropdown(WebDriver driver, String locator, String textItem) {
         new Select(getElement(driver,locator)).selectByVisibleText(textItem);
+    }
+
+    public void selectItemInDropdown(WebDriver driver, String locator, String textItem, String restParameter) {
+        new Select(getElement(driver,caseParameter(locator, restParameter))).selectByVisibleText(textItem);
     }
 
     public String getSelectItemInDropdown(WebDriver driver, String locator) {
         return new Select(getElement(driver,locator)).getFirstSelectedOption().getText();
     }
+
+
     public boolean isDropdownMultiple(WebDriver driver, String locator) {
         return new Select(getElement(driver,locator)).isMultiple();
     }
@@ -198,8 +218,16 @@ public class BasePage {
         return getElement(driver, locator).getAttribute(attributeName);
     }
 
+    public String getElementAttribute(WebDriver driver, String locator, String attributeName, String restParameter){
+        return getElement(driver, caseParameter(locator, restParameter)).getAttribute(attributeName);
+    }
+
     public String getElementText(WebDriver driver, String locator){
         return getElement(driver, locator).getText();
+    }
+
+    public String getElementText(WebDriver driver, String locator, String restParameter){
+        return getElement(driver, caseParameter(locator, restParameter)).getText();
     }
 
     public String getElementCssValue(WebDriver driver, String locator, String propertyName){
