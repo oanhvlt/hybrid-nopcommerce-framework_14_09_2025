@@ -3,7 +3,7 @@ package pageObjects.user;
 import org.openqa.selenium.WebDriver;
 import pageUIs.user.CustomerPageUI;
 
-public class UserCustomerInfoPO extends SidebarPageObject {
+public class UserCustomerInfoPO extends UserSidebarPO {
 
     public UserCustomerInfoPO(WebDriver driver) {
         super(driver);

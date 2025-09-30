@@ -96,21 +96,29 @@ public class Level_10_Dynamic_Locator extends BaseTest {
     @Test
     public void User_04_Dynamic_Page(){
         //Customer Info -> Address page
-        addressPage = customerInfoPage.openAddressPage(driver);
+        addressPage = (UserAddressPO) customerInfoPage.openSidebarLinkByPageNameAndReturn("customer-addresses","Addresses");
 
         //
-        rewardPointPage = addressPage.openRewardPointPage(driver);
+        rewardPointPage = (UserRewardPointPO) addressPage.openSidebarLinkByPageNameAndReturn("reward-points","Reward points");
 
         //
-        orderPage = rewardPointPage.openOrderPage(driver);
+        orderPage = (UserOrderPO) rewardPointPage.openSidebarLinkByPageNameAndReturn("customer-orders","Orders");
 
         //
-        addressPage = orderPage.openAddressPage(driver);
+        addressPage = (UserAddressPO) orderPage.openSidebarLinkByPageNameAndReturn("customer-addresses","Addresses");
 
         //
-        customerInfoPage = addressPage.openCustomerInfoPage(driver);
+        customerInfoPage = (UserCustomerInfoPO) addressPage.openSidebarLinkByPageNameAndReturn("customer-info","Customer info");
 
-        addressPage = rewardPointPage.openAddressPage(driver);
+        addressPage = (UserAddressPO) rewardPointPage.openSidebarLinkByPageNameAndReturn("customer-addresses","Addresses");
+    }
+
+    @Test
+    public void User_05_Dynamic_Page(){
+        addressPage.openSidebarLinkByPageNames("reward-points","Reward points");
+        rewardPointPage = PageGenerator.getUserRewardPointPage(driver);
+
+
     }
 
     @AfterClass

@@ -2,7 +2,7 @@ package pageObjects.user;
 
 import org.openqa.selenium.WebDriver;
 
-public class UserAddressPO extends SidebarPageObject {
+public class UserAddressPO extends UserSidebarPO {
     private WebDriver driver;
 
     public UserAddressPO(WebDriver driver) {

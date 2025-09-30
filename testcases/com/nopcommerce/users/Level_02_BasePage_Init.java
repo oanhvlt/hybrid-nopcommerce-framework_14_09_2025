@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.Random;
 
-public class Level_02_BasePage_Init {
+public class Level_02_BasePage_Init extends BasePage{
 
     WebDriver driver;
     BasePage basePage;
@@ -71,7 +71,7 @@ public class Level_02_BasePage_Init {
         Assert.assertEquals(basePage.getElementText(driver,"//div[@class='result']"), "Your registration completed");
 
         //logout a.ico-logout
-        basePage.getElement(driver,"//a[@class='ico-logout']").click();
+        getElement(driver,"//a[@class='ico-logout']").click();
 
     }
     @Test
